@@ -4,27 +4,32 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
-=./
+LIBFT = ./inc/libft
+PRINTF = ./inc/ft_printf
 
-SRCS =
-
+SRCS = src/push_swap.c
 OBJS = $(SRCS:.c=.o)
-
 HEADER = push_swap.h
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@$(MAKE) -C $(LIBFT)
+	@$(MAKE) -C $(PRINTF)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(PRINTF) -lftprintf -o $(NAME)
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)
+	$(MAKE) -C $(LIBFT) clean
+	$(MAKE) -C $(PRINTF) clean
 
 fclean: clean
 	$(RM) $(NAME)
+	$(MAKE) -C $(LIBFT) fclean
+	$(MAKE) -C $(PRINTF) fclean
 
 re: fclean all
 

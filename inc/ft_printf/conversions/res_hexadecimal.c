@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   res_hexadecimal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 11:52:26 by mkrainyk          #+#    #+#             */
-/*   Updated: 2024/12/18 16:00:59 by mkrainyk         ###   ########.fr       */
+/*   Created: 2024/12/07 17:01:34 by mkrainyk          #+#    #+#             */
+/*   Updated: 2024/12/07 17:01:35 by mkrainyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-
-# include "./inc/ft_printf/ft_printf.h"
-# include "./inc/libft/libft.h"
-
-typedef struct s_node
+int	res_hexadecimal(unsigned int nbr, char *base)
 {
-	int value;
-	struct s_node *next;
-} t_node;
+	int	len;
+	int	count;
 
-t_node *stack_init(int ac, char **av);
-void	free_stack(t_node **stack);
-void	print_stack(t_node *stack);
-
-#endif
+	len = ft_strlen(base);
+	count = 0;
+	if (nbr >= (unsigned int)len)
+		count += res_hexadecimal(nbr / len, base);
+	count += res_character(base[nbr % len]);
+	return (count);
+}

@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   res_string.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 11:52:26 by mkrainyk          #+#    #+#             */
-/*   Updated: 2024/12/18 16:00:59 by mkrainyk         ###   ########.fr       */
+/*   Created: 2024/12/07 17:12:05 by mkrainyk          #+#    #+#             */
+/*   Updated: 2024/12/07 17:17:22 by mkrainyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-
-# include "./inc/ft_printf/ft_printf.h"
-# include "./inc/libft/libft.h"
-
-typedef struct s_node
+int	res_string(char *s)
 {
-	int value;
-	struct s_node *next;
-} t_node;
+	unsigned int	count;
 
-t_node *stack_init(int ac, char **av);
-void	free_stack(t_node **stack);
-void	print_stack(t_node *stack);
-
-#endif
+	if (!s)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
+	ft_putstr_fd(s, 1);
+	count = ft_strlen(s);
+	return (count);
+}
