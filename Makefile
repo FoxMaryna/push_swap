@@ -7,7 +7,8 @@ RM = rm -f
 PRINTF = ./inc/ft_printf
 
 SRCS = src/push_swap.c \
-		src/sorting.c \
+		src/sorting_small.c \
+		src/sorting_large.c \
 		src/utils.c \
 		operation/push.c \
 		operation/swap.c \
