@@ -18,7 +18,7 @@
 # include <limits.h>
 # include <stdint.h>
 
-# include "../libft/libft.h"
+# include "./libft/libft.h"
 
 # define LOWER_HEX "0123456789abcdef"
 # define UPPER_HEX "0123456789ABCDEF"

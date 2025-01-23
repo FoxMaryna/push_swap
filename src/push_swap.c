@@ -12,66 +12,56 @@
 
 #include "../push_swap.h"
 
-t_node *new_node(int value)
+void push(t_stack **stack, int value)
 {
-	t_node *node = malloc(sizeof(t_node));
-	if(!node)
-		return (NULL);
-	node->value = value;
-	node->next = NULL;
-	return (node);
+	t_stack *new_node = malloc(sizeof(t_stack));
+	if (!new_node)
+		handle_error();
+	new_node->value = value;
+	new_node->next = *stack;
+	*stack = new_node;
 }
 
-t_node *stack_init(int ac, char **av)
+int pop(t_stack **stack)
 {
-	t_node *stack = NULL;
-	t_node *current;
-	int i;
-	int value;
-
-	i = 1;
-	while (i < ac)
-	{
-		value = ft_atoi(av[i]); // wirhout validation
-		t_node *new = new_node(value);
-		if (!new)
-			return (free_stack(&stack), NULL);
-		if (!stack)
-			stack = new;
-		else
-			current->next = new;
-		current = new;
-		i++;
-	}
-	return (stack);
+	if (!*stack)
+		return (0);
+	t_stack *temp = *stack;
+	int value = temp->value;
+	*stack = temp->next;
+	free(temp);
+	return (value);
 }
 
-void free_srack(t_node **stack)
+void push_swap(t_stack **stack_a, t_stack **stack_b)
 {
-	t_node *tmp;
-	while (*stack)
-	{
-		tmp = (*stack)->next;
-		free(*stack);
-		*stack = tmp;
-	}
+	int size = stack_size(*stack_a);
+	if (size <= 3)
+		sort_small_stack(stack_a, stack_b, size);
+	else
+		sort_large_stack(stack_a, stack_b, size);
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
+	t_stack *stack_a = NULL;
+	t_stack *stack_b = NULL;
+
 	if (ac < 2)
 	{
-		ft_printf("Usage: ./push_swap [numbers]\n");
+		ft_printf("Usage: ./push_swap [number]\n");
 		return (1);
 	}
-	t_node *stack = stack_init(ac, av);
-	if (!stack)
+	int i = ac - 1;
+	while (i > 0)
 	{
-		ft_printf("Error\n");
-		return (1);
+		push(&stack_a, ft_atoi(av[i]));
+		i--;
 	}
-	ft_printf("Stack initialized:\n");
-	print_stack(stack);
-	free_stack(&stack);
+	if (!is_sorted(stack_a))
+		push_swap(&stack_a, &stack_b);
+
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 	return (0);
 }
