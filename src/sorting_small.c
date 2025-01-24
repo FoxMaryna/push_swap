@@ -2,10 +2,15 @@
 
 void sort_three(t_stack **stack_a)
 {
+    // Если первый элемент больше второго и третьего, сдвигаем его в конец (ra)
     if ((*stack_a)->value > (*stack_a)->next->value && (*stack_a)->value > (*stack_a)->next->next->value)
         ra(stack_a);
+
+    // Если второй элемент больше первого и третьего, сдвигаем его в начало (rra)
     if ((*stack_a)->next->value > (*stack_a)->value && (*stack_a)->next->value > (*stack_a)->next->next->value)
         rra(stack_a);
+
+    // Если первый элемент больше второго, меняем их местами (sa)
     if ((*stack_a)->value > (*stack_a)->next->value)
         sa(stack_a);
 }
@@ -25,17 +30,29 @@ int get_index_of_value(t_stack *stack, int value)
 
 void move_to_top(t_stack **stack, int i)
 {
-	int size = stack_size(*stack);
-
+	int size;
+	
+	if (!stack || !*stack)
+		return;
+	
+	size = stack_size(*stack);
+	if (i < 0 || i >= size)
+		return;
 	if (i <= size / 2)
 	{
-		while (i-- > 0)
+		while (i > 0)
+		{
 			ra(stack);
+			i--;
+		}
 	}
 	else
 	{
-		while (i++ < size)
+		while (i < size)
+		{
 			rra(stack);
+			i++;
+		}
 	}
 }
 

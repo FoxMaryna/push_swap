@@ -72,6 +72,7 @@ void quicksort_stack(t_stack **stack_a, t_stack **stack_b, int size)
 			ra(stack_a);
 			rotated++;
 		}
+		i++;
 	}
 	while (rotated-- > 0)
 		rra(stack_a);
@@ -116,6 +117,7 @@ void radix_sort(t_stack **stack_a, t_stack **stack_b, int size)
 				pb(stack_a, stack_b);
 			else
 				ra(stack_a);
+			ft_printf("8");
 			j++;
 		}
 		i++;

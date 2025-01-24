@@ -9,7 +9,9 @@ void ra(t_stack **stack_a)
 	temp->next = NULL;
 	t_stack *last = *stack_a;
 	while (last->next)
+	{
 		last = last->next;
+	}
 	last->next = temp;
 	ft_printf("ra\n");
 }

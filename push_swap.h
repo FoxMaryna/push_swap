@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
 # include "./inc/ft_printf/ft_printf.h"
 
@@ -28,6 +29,8 @@ typedef struct s_stack
 void push(t_stack **t_stack, int value);
 int pop(t_stack **stack);
 void push_swap(t_stack **stack_a, t_stack **stack_b);
+void free_string_array(char **array);
+void populate_stack(t_stack **stack, char **tokens);
 
 // sort_operations
 void sa(t_stack **stack_a);
@@ -45,6 +48,7 @@ void rrr(t_stack **stack_a, t_stack **stack_b);
 // utils
 void print_stack(t_stack *stack);
 void free_stack(t_stack **stack);
+void free_split(char **s);
 int is_sorted(t_stack *stack);
 int stack_size(t_stack *s_stack);
 int is_valid_number(char *str);

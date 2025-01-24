@@ -6,6 +6,18 @@ void free_stack(t_stack **stack)
 		pop(stack);
 }
 
+void free_split(char **s)
+{
+    int i = 0;
+
+    while (s[i])
+    {
+        free(s[i]);
+        i++;
+    }
+    free(s);
+}
+
 int is_sorted(t_stack *stack)
 {
 	while (stack && stack->next)
