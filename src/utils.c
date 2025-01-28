@@ -3,6 +3,7 @@
 void free_stack(t_stack **stack)
 {
 	while (*stack)
+	
 		pop(stack);
 }
 

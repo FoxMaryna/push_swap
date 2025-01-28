@@ -87,21 +87,17 @@ int pop(t_stack **stack)
 void push_swap(t_stack **stack_a, t_stack **stack_b)
 {
 	int size = stack_size(*stack_a);
-	ft_printf("Stack size: %d\n", size);
 
 	if (size <= 5)
 	{
-		ft_printf("Using sort_small_stack\n");
 		sort_small_stack(stack_a, stack_b, size);
 	}
 	else if (size <= 100)
 	{
-		ft_printf("Using quicksort_stack\n");
 		quicksort_stack(stack_a, stack_b, size);
 	}
 	else
 	{
-		ft_printf("Using radix_sort\n");
 		radix_sort(stack_a, stack_b, size);
 	}
 }
