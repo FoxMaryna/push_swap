@@ -1,11 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 11:37:15 by mkrainyk          #+#    #+#             */
+/*   Updated: 2025/02/02 14:19:07 by mkrainyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-void rra(t_stack **stack_a)
+void	rra(t_stack **stack_a)
 {
+	t_stack *prev;
+	t_stack *curr;
+
 	if (!*stack_a || !(*stack_a)->next)
 		return;
-	t_stack *prev = NULL;
-	t_stack *curr = *stack_a;
+	prev = NULL;
+	curr = *stack_a;
 	while (curr->next)
 	{
 		prev = curr;
@@ -17,12 +32,15 @@ void rra(t_stack **stack_a)
 	ft_printf("rra\n");
 }
 
-void rrb(t_stack **stack_b)
+void	rrb(t_stack **stack_b)
 {
+	t_stack *prev;
+	t_stack *curr;
+
 	if (!*stack_b || !(*stack_b)->next)
 		return;
-	t_stack *prev = NULL;
-	t_stack *curr = *stack_b;
+	prev = NULL;
+	curr = *stack_b;
 	while (curr->next)
 	{
 		prev = curr;
@@ -31,10 +49,10 @@ void rrb(t_stack **stack_b)
 	prev->next = NULL;
 	curr->next = *stack_b;
 	*stack_b = curr;
-	ft_printf("rra\n");
+	ft_printf("rrb\n");
 }
 
-void rrr(t_stack **stack_a, t_stack **stack_b)
+void	rrr(t_stack **stack_a, t_stack **stack_b)
 {
 	rra(stack_a);
 	rrb(stack_b);

@@ -6,7 +6,7 @@
 /*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:52:26 by mkrainyk          #+#    #+#             */
-/*   Updated: 2024/12/18 16:00:59 by mkrainyk         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:54:03 by mkrainyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void sort_three(t_stack **stack_a);
 int get_min_value(t_stack *stack);
 int get_index_of_value(t_stack *stack, int value);
 void move_to_top(t_stack **stack, int i);
-void sort_five(t_stack **stack_a, t_stack **stack_b, int size);
+void sort_five(t_stack **stack_a, t_stack **stack_b);
+void	sort_four(t_stack **stack_a, t_stack **stack_b);
 void sort_small_stack(t_stack **stack_a, t_stack **stack_b, int size);
 void quicksort_array(int *arr, int low, int high);
 int find_pivot(t_stack *stack, int size);
@@ -68,6 +69,8 @@ int get_max_value(t_stack *stack);
 void radix_sort(t_stack **stack_a, t_stack **stack_b, int size);
 
 // error
-void handle_error(void);
+void	handle_error(t_stack **stack_a, t_stack **stack_b);
+
+int	has_duplicates(t_stack *stack);
 
 #endif

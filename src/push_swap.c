@@ -6,39 +6,45 @@
 /*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:52:19 by mkrainyk          #+#    #+#             */
-/*   Updated: 2024/12/18 16:00:58 by mkrainyk         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:52:25 by mkrainyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void free_string_array(char **array)
+void	free_string_array(char **array)
 {
-    int i = 0;
-    while (array[i])
-        free(array[i++]);
-    free(array);
+	int	i;
+	
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+		free(array[i++]);
+	free(array);
 }
 
-// Заполнение стека из массива строк
-void populate_stack(t_stack **stack, char **tokens)
+void	populate_stack(t_stack **stack, char **tokens)
 {
-    int i = 0;
-    while (tokens[i])
-    {
+	int	i;
+	
+	i = 0;
+	while (tokens[i])
+	{
 		if (!is_valid_number(tokens[i]))
-		{
-			handle_error();
-			return;
-		}
+			handle_error(stack, NULL);
 		push(stack, ft_atoi(tokens[i]));
-        i++;
-    }
+		i++;
+	}
+	if (has_duplicates(*stack))
+		handle_error(stack, NULL);
 }
 
-int is_valid_number(char *str)
+int	is_valid_number(char *str)
 {
-	int i = 0;
+	int	i;
+	
+	i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	if (!str[i])
@@ -46,89 +52,76 @@ int is_valid_number(char *str)
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return 0;
+			return (0);
 		i++;
 	}
-	return 1;
+	return (1);
 }
 
-void push(t_stack **stack, int value)
+int	has_duplicates(t_stack *stack)
 {
-	   t_stack *new_node = malloc(sizeof(t_stack));
-    if (!new_node)
-        handle_error();
-    new_node->value = value;
-    new_node->next = NULL;
+	t_stack	*current;
+	t_stack	*checker;
 
-    if (*stack == NULL)
-    {
-        *stack = new_node;
-    }
-    else
-    {
-        t_stack *current = *stack;
-        while (current->next)
-            current = current->next;
-        current->next = new_node;
-    }
-}
-
-int pop(t_stack **stack)
-{
-	if (!*stack)
-		return (0);
-	t_stack *temp = *stack;
-	int value = temp->value;
-	*stack = temp->next;
-	free(temp);
-	return (value);
-}
-
-void push_swap(t_stack **stack_a, t_stack **stack_b)
-{
-	int size = stack_size(*stack_a);
-
-	if (size <= 5)
+	current = stack;
+	while (current)
 	{
-		sort_small_stack(stack_a, stack_b, size);
-	}
-	else if (size <= 100)
-	{
-		quicksort_stack(stack_a, stack_b, size);
-	}
-	else
-	{
-		radix_sort(stack_a, stack_b, size);
-	}
-}
-
-int main(int ac, char **av)
-{
-	t_stack *stack_a = NULL;
-	t_stack *stack_b = NULL;
-	char **tokens;
-
-	if (ac < 2)
-	{
-		ft_printf("Usage: ./push_swap [number]\n");
-		return (1);
-	}
-	av++;
-	while(--ac)
-	{
-		tokens = ft_split(*av, ' ');
-		if (!tokens)
+		checker = current->next;
+		while (checker)
 		{
-			free_stack(&stack_a);
-			handle_error();
+			if (current->value == checker->value)
+				return (1);
+			checker = checker->next;
 		}
-		populate_stack(&stack_a, tokens);
-		free_string_array(tokens);
-		av++;
+		current = current->next;
 	}
-
-	push_swap(&stack_a, &stack_b);
-	free_stack(&stack_a);
-	free_stack(&stack_b);
 	return (0);
+}
+
+// void	push(t_stack **stack, int value)
+// {
+// 	t_stack	*new_node;
+// 	t_stack	*current;
+	
+// 	new_node = malloc(sizeof(t_stack));
+// 	if (!new_node)
+// 		handle_error();
+// 	new_node->value = value;
+// 	new_node->next = NULL;
+// 	if (*stack == NULL)
+// 		*stack = new_node;
+// 	else
+// 	{
+// 		current = *stack;
+// 		while (current->next)
+// 			current = current->next;
+// 		current->next = new_node;
+// 	}
+// }
+
+// int	pop(t_stack **stack)
+// {
+// 	t_stack	*temp;
+// 	int		value;
+
+// 	if (!*stack)
+// 		return (0);
+// 	temp = *stack;
+// 	value = temp->value;
+// 	*stack = temp->next;
+// 	free(temp);
+// 	return (value);
+// }
+
+void	push_swap(t_stack **stack_a, t_stack **stack_b)
+{
+	int	size;
+
+	size = stack_size(*stack_a);
+	if (size <= 5)
+		sort_small_stack(stack_a, stack_b, size);
+	else if (size <= 100)
+		quicksort_stack(stack_a, stack_b, size);
+	else
+		radix_sort(stack_a, stack_b, size);
 }
