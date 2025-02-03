@@ -6,7 +6,7 @@
 /*   By: maryna <maryna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:52:26 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/03 12:49:01 by maryna           ###   ########.fr       */
+/*   Updated: 2025/02/03 19:00:28 by maryna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef struct s_stack
 {
 	int value;
+	int index;
 	struct s_stack *next;
 } t_stack;
 
@@ -34,14 +35,17 @@ void free_string_array(char **array);
 void populate_stack(t_stack **stack, char **tokens);
 
 // sort_operations
+void pa(t_stack **stack_a, t_stack **stack_b);
+void pb(t_stack **stack_a, t_stack **stack_b);
+void swap(t_stack **stack);
 void sa(t_stack **stack_a);
 void sb(t_stack **stack_b);
 void ss(t_stack **stack_a, t_stack **stack_b);
-void pa(t_stack **stack_a, t_stack **stack_b);
-void pb(t_stack **stack_a, t_stack **stack_b);
+void rotate(t_stack **stack);
 void ra(t_stack **stack_a);
 void rb(t_stack **stack_b);
 void rr(t_stack **stack_a, t_stack **stack_b);
+void reverse_rotate(t_stack **stack);
 void rra(t_stack **stack_a);
 void rrb(t_stack **stack_b);
 void rrr(t_stack **stack_a, t_stack **stack_b);
@@ -62,15 +66,14 @@ void move_to_top(t_stack **stack, int i);
 void sort_five(t_stack **stack_a, t_stack **stack_b);
 void	sort_four(t_stack **stack_a, t_stack **stack_b);
 void sort_small_stack(t_stack **stack_a, t_stack **stack_b, int size);
-void quicksort_array(int *arr, int low, int high);
-int find_pivot(t_stack *stack, int size);
-void quicksort_stack(t_stack **stack_a, t_stack **stack_b, int size);
-int get_max_value(t_stack *stack);
-void radix_sort(t_stack **stack_a, t_stack **stack_b, int size);
+// int get_max_value(t_stack *stack);
+void radix_sort(t_stack **stack_a, t_stack **stack_b);
 
 // error
 void	handle_error(t_stack **stack_a, t_stack **stack_b);
 
 int	has_duplicates(t_stack *stack);
+
+void sort_stack(t_stack **stack_a, t_stack **stack_b);
 
 #endif

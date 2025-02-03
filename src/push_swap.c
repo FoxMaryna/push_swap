@@ -6,7 +6,7 @@
 /*   By: maryna <maryna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:52:19 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/03 11:08:38 by maryna           ###   ########.fr       */
+/*   Updated: 2025/02/03 19:01:13 by maryna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,39 +89,25 @@ int	has_duplicates(t_stack *stack)
 	return (0);
 }
 
-void	push(t_stack **stack, int value)
+void normalize_stack(t_stack **stack)
 {
-	t_stack	*new_node;
-	t_stack	*current;
-	
-	new_node = malloc(sizeof(t_stack));
-	if (!new_node)
-		handle_error(stack, NULL);
-	new_node->value = value;
-	new_node->next = NULL;
-	if (*stack == NULL)
-		*stack = new_node;
-	else
-	{
-		current = *stack;
-		while (current->next)
-			current = current->next;
-		current->next = new_node;
-	}
-}
+    t_stack *current = *stack;
+    t_stack *compare;
+    int index;
 
-int	pop(t_stack **stack)
-{
-	t_stack	*temp;
-	int		value;
-
-	if (!*stack)
-		return (0);
-	temp = *stack;
-	value = temp->value;
-	*stack = temp->next;
-	free(temp);
-	return (value);
+    while (current)
+    {
+        index = 0;
+        compare = *stack;
+        while (compare)
+        {
+            if (current->value > compare->value)
+                index++;
+            compare = compare->next;
+        }
+        current->index = index;
+        current = current->next;
+    }
 }
 
 void	push_swap(t_stack **stack_a, t_stack **stack_b)
@@ -129,10 +115,9 @@ void	push_swap(t_stack **stack_a, t_stack **stack_b)
 	int	size;
 
 	size = stack_size(*stack_a);
+    normalize_stack(stack_a);
 	if (size <= 5)
 		sort_small_stack(stack_a, stack_b, size);
-	else if (size <= 100)
-		quicksort_stack(stack_a, stack_b, size);
 	else
-		radix_sort(stack_a, stack_b, size);
+		radix_sort(stack_a, stack_b);
 }

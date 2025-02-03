@@ -6,7 +6,7 @@
 /*   By: maryna <maryna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:37:39 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/03 11:24:48 by maryna           ###   ########.fr       */
+/*   Updated: 2025/02/03 18:40:32 by maryna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int is_sorted(t_stack *stack)
     if (!stack || !stack->next)
         return (1);
 
-    while (stack->next)
+    while (stack && stack->next)
     {
         if (stack->value > stack->next->value)
             return (0);
