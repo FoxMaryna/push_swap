@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maryna <maryna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:37:23 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/02 11:43:39 by mkrainyk         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:12:38 by maryna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,30 @@
 
 void	sa(t_stack **stack_a)
 {
-	int temp;
-
-	if (!*stack_a || !(*stack_a)->next)
-		return;
-	temp = (*stack_a)->value;
-	(*stack_a)->value = (*stack_a)->next->value;
-	(*stack_a)->next->value = temp;
-	ft_printf("sa\n");
+	t_stack *first, *second;
+    
+    if (!*stack_a || !(*stack_a)->next)
+        return;
+    first = *stack_a;
+    second = first->next;
+    first->next = second->next;
+    second->next = first;
+    *stack_a = second;
+    ft_printf("sa\n");
 }
 
 void	sb(t_stack **stack_b)
 {
-	int temp;
-	if (!*stack_b || !(*stack_b)->next)
-		return;
-	temp = (*stack_b)->value;
-	(*stack_b)->value = (*stack_b)->next->value;
-	(*stack_b)->next->value = temp;
-	ft_printf("sb\n");
+	 t_stack *first, *second;
+    
+    if (!*stack_b || !(*stack_b)->next)
+        return;
+    first = *stack_b;
+    second = first->next;
+    first->next = second->next;
+    second->next = first;
+    *stack_b = second;
+    ft_printf("sb\n");
 }
 
 void	ss(t_stack **stack_a, t_stack **stack_b)

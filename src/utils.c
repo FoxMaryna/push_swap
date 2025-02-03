@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maryna <maryna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:37:39 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/02 14:50:12 by mkrainyk         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:24:48 by maryna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,18 @@ void	free_stack(t_stack **stack)
 	}
 }
 
-int	is_sorted(t_stack *stack)
+int is_sorted(t_stack *stack)
 {
-	while (stack && stack->next)
-	{
-		if (stack->value > stack->next->value)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
+    if (!stack || !stack->next)
+        return (1);
+
+    while (stack->next)
+    {
+        if (stack->value > stack->next->value)
+            return (0);
+        stack = stack->next;
+    }
+    return (1);
 }
 
 int	stack_size(t_stack *stack)
@@ -58,16 +61,18 @@ void	handle_error(t_stack **stack_a, t_stack **stack_b)
 	exit(EXIT_FAILURE);
 }
 
-int	get_min_value(t_stack *stack)
+int get_min_value(t_stack *stack)
 {
-	int	min;
-
-	min = stack->value;
-	while (stack)
-	{
-		if (stack->value < min)
-			min = stack->value;
-		stack = stack->next;
-	}
-	return (min);
+    int min;
+    
+    if (!stack)
+        return (0);  // или обработать ошибку
+    min = stack->value;
+    while (stack)
+    {
+        if (stack->value < min)
+            min = stack->value;
+        stack = stack->next;
+    }
+    return (min);
 }

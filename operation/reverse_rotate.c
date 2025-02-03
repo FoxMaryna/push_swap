@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maryna <maryna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:37:15 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/02 14:19:07 by mkrainyk         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:26:42 by maryna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,40 @@
 
 void	rra(t_stack **stack_a)
 {
-	t_stack *prev;
-	t_stack *curr;
-
-	if (!*stack_a || !(*stack_a)->next)
-		return;
-	prev = NULL;
-	curr = *stack_a;
-	while (curr->next)
-	{
-		prev = curr;
-		curr = curr->next;
-	}
-	prev->next = NULL;
-	curr->next = *stack_a;
-	*stack_a = curr;
-	ft_printf("rra\n");
+	t_stack *last, *second_last;
+    
+    if (!*stack_a || !(*stack_a)->next)
+        return;
+    last = *stack_a;
+    second_last = NULL;
+    while (last->next)
+    {
+        second_last = last;
+        last = last->next;
+    }
+    last->next = *stack_a;
+    *stack_a = last;
+    second_last->next = NULL;
+    ft_printf("rra\n");
 }
 
 void	rrb(t_stack **stack_b)
 {
-	t_stack *prev;
-	t_stack *curr;
-
-	if (!*stack_b || !(*stack_b)->next)
-		return;
-	prev = NULL;
-	curr = *stack_b;
-	while (curr->next)
-	{
-		prev = curr;
-		curr = curr->next;
-	}
-	prev->next = NULL;
-	curr->next = *stack_b;
-	*stack_b = curr;
-	ft_printf("rrb\n");
+	t_stack *last, *second_last;
+    
+    if (!*stack_b || !(*stack_b)->next)
+        return;
+    last = *stack_b;
+    second_last = NULL;
+    while (last->next)
+    {
+        second_last = last;
+        last = last->next;
+    }
+    last->next = *stack_b;
+    *stack_b = last;
+    second_last->next = NULL;
+    ft_printf("rrb\n");
 }
 
 void	rrr(t_stack **stack_a, t_stack **stack_b)
