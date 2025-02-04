@@ -10,6 +10,7 @@ SRCS = src/main.c \
 		src/sorting_small.c \
 		src/sorting_large.c \
 		src/utils.c \
+		src/free_and_error.c \
 		operation/push.c \
 		operation/swap.c \
 		operation/rotate.c \
@@ -23,18 +24,18 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(PRINTF)
-	$(CC) $(CFLAGS) $(OBJS) -L$(PRINTF) -lftprintf -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -L$(PRINTF) -lftprintf -o $(NAME)
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS)
-	$(MAKE) -C $(PRINTF) clean
+	@$(RM) $(OBJS)
+	@$(MAKE) -C $(PRINTF) clean
 
 fclean: clean
-	$(RM) $(NAME)
-	$(MAKE) -C $(PRINTF) fclean
+	@$(RM) $(NAME)
+	@$(MAKE) -C $(PRINTF) fclean
 
 re: fclean all
 

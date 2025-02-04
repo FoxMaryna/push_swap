@@ -22,22 +22,22 @@ HEADER 		= ft_printf.h
 all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
-	cp $(LIBFT) $(NAME)
-	ar rcs $(NAME) $(OBJS)
+	@cp $(LIBFT) $(NAME)
+	@ar rcs $(NAME) $(OBJS)
 
 $(LIBFT):
-	make -C $(LIBFT_SRCS) all
+	@make -C $(LIBFT_SRCS) all
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -I ./ -c $< -o $@
+	@$(CC) $(CFLAGS) -I ./ -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
-	make -C $(LIBFT_SRCS) clean
+	@rm -f $(OBJS)
+	@make -C $(LIBFT_SRCS) clean
 
 fclean: clean
-	rm -f $(NAME)
-	make -C $(LIBFT_SRCS) fclean
+	@rm -f $(NAME)
+	@make -C $(LIBFT_SRCS) fclean
 
 re: fclean all
 

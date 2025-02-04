@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   free_and_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 13:18:13 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/04 12:01:13 by mkrainyk         ###   ########.fr       */
+/*   Created: 2025/02/04 14:06:44 by mkrainyk          #+#    #+#             */
+/*   Updated: 2025/02/04 14:07:23 by mkrainyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	free_stack(t_stack **stack)
 {
-	size_t			i;
-	unsigned char	*a;
+	t_stack	*temp;
 
-	a = (unsigned char *)b;
-	i = 0;
-	while (len-- > 0)
-		a[i++] = (unsigned char)c;
-	return (b);
+	while (*stack)
+	{
+		temp = *stack;
+		*stack = (*stack)->next;
+		free(temp);
+	}
+}
+
+void	error_exit(t_stack **a, t_stack **b)
+{
+	if (a)
+		free_stack(a);
+	if (b)
+		free_stack(b);
+	ft_printf("Error\n");
+	exit(1);
 }

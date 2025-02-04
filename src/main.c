@@ -3,81 +3,102 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maryna <maryna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:48:07 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/04 01:38:48 by maryna           ###   ########.fr       */
+/*   Updated: 2025/02/04 14:43:08 by mkrainyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static int is_number(char *str)
+static int	is_number(char *str)
 {
-    int i = 0;
+	int	i;
 
-    if (str[i] == '-')
-        i++;
-    while (str[i])
-    {
-        if (str[i] < '0' || str[i] > '9')
-            return 0;
-        i++;
-    }
-    return 1;
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-static void parse_args(int argc, char **argv, t_stack **a)
+static int	has_duplicate(t_stack *a, int num)
 {
-    int i;
-    long num;
-
-    for (i = 1; i < argc; i++)
-    {
-        if (!is_number(argv[i]))
-            error_exit(a, NULL);
-        num = atol(argv[i]);
-        if (num > INT_MAX || num < INT_MIN)
-            error_exit(a, NULL);
-        add_node_back(a, create_node((int)num));
-    }
+	while (a)
+	{
+		if (a->value == num)
+			return (1);
+		a = a->next;
+	}
+	return (0);
 }
 
-void error_exit(t_stack **a, t_stack **b)
+static void	parse_numbers(char **nums, t_stack **a)
 {
-    if (a)
-        free_stack(a);
-    if (b)
-        free_stack(b);
-    ft_printf("Error\n");
-    exit(1);
+	int	num;
+	int	j;
+
+	j = 0;
+	while (nums[j])
+	{
+		if (!is_number(nums[j]))
+			error_exit(a, NULL);
+		num = ft_atoi(nums[j]);
+		if (num > INT_MAX || num < INT_MIN)
+			error_exit(a, NULL);
+		if (has_duplicate(*a, num))
+			error_exit(a, NULL);
+		add_node_back(a, create_node(num));
+		free(nums[j]);
+		j++;
+	}
+	free(nums);
 }
 
-int main(int argc, char **argv)
+static void	parse_args(int argc, char **argv, t_stack **a)
 {
-    t_stack *a = NULL;
-    t_stack *b = NULL;
+	int		i;
+	char	**nums;
 
-    if (argc < 2)
-        return 0;
-
-    parse_args(argc, argv, &a);
-    if (is_sorted(a))
-    {
-        free_stack(&a);
-        return 0;
-    }
-
-    index_stack(&a);
-
-    if (stack_size(a) <= 3)
-        sort_three(&a);
-    else if (stack_size(a) <= 5)
-        sort_small(&a, &b);
-    else
-        sort_stack(&a, &b);
-
-    free_stack(&a);
-    return 0;
+	i = 1;
+	while (i < argc)
+	{
+		nums = ft_split(argv[i], ' ');
+		if (!nums)
+			error_exit(a, NULL);
+		parse_numbers(nums, a);
+		i++;
+	}
 }
 
+int	main(int argc, char **argv)
+{
+	t_stack	*a;
+	t_stack	*b;
+
+	a = NULL;
+	b = NULL;
+	if (argc < 2)
+		return (0);
+	parse_args(argc, argv, &a);
+	if (is_sorted(a))
+	{
+		free_stack(&a);
+		return (0);
+	}
+	index_stack(&a);
+	if (stack_size(a) <= 3)
+		sort_three(&a);
+	else if (stack_size(a) <= 5)
+		sort_small(&a, &b);
+	else
+		sort_stack(&a, &b);
+	free_stack(&a);
+	return (0);
+}
