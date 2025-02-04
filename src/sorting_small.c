@@ -6,7 +6,7 @@
 /*   By: maryna <maryna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:37:36 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/04 01:40:58 by maryna           ###   ########.fr       */
+/*   Updated: 2025/02/04 02:01:37 by maryna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,50 @@ void sort_three(t_stack **a)
 void sort_small(t_stack **a, t_stack **b)
 {
     int size = stack_size(*a);
+    int min_index = (*a)->index;
+    int max_index = (*a)->index;
+
+    t_stack *temp = *a;
+    while (temp)
+    {
+        if (temp->index < min_index)
+            min_index = temp->index;
+        if (temp->index > max_index)
+            max_index = temp->index;
+        temp = temp->next;
+    }
 
     while (size > 3)
     {
-        if ((*a)->index == get_min(*a))
+        if ((*a)->index == min_index || (*a)->index == max_index)
+        {
             pb(a, b);
+        }
+        else if ((*a)->next->index == min_index || (*a)->next->index == max_index)
+        {
+            sa(a);
+            pb(a, b);
+        }
         else
-            ra(a);
+        {
+            rra(a);
+        }
         size--;
     }
+    
     sort_three(a);
+    
     while (*b)
-        pa(a, b);
+    {
+        if ((*b)->index == max_index)
+        {
+            pa(a, b);
+            ra(a);
+        }
+        else
+        {
+            pa(a, b);
+        }
+    }
 }
+
