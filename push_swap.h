@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maryna <maryna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:52:26 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/04 14:08:01 by mkrainyk         ###   ########.fr       */
+/*   Updated: 2025/02/04 21:22:42 by maryna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <errno.h>
 # include "./inc/ft_printf/ft_printf.h"
 
 typedef struct s_stack
@@ -50,6 +51,7 @@ void	free_stack(t_stack **stack);
 t_stack	*create_node(int value);
 void	add_node_back(t_stack **stack, t_stack *new);
 void	index_stack(t_stack **stack);
+long    ft_atol(const char *str);
 
 // Error handling
 void	error_exit(t_stack **a, t_stack **b);
