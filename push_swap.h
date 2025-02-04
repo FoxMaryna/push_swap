@@ -6,7 +6,7 @@
 /*   By: maryna <maryna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:52:26 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/03 19:00:28 by maryna           ###   ########.fr       */
+/*   Updated: 2025/02/04 01:40:08 by maryna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,65 +15,44 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <limits.h>
-
 # include "./inc/ft_printf/ft_printf.h"
 
 typedef struct s_stack
 {
-	int value;
-	int index;
-	struct s_stack *next;
+    int             value;
+    int             index;
+    struct s_stack  *next;
 } t_stack;
 
-// main functions
-void push(t_stack **t_stack, int value);
-int pop(t_stack **stack);
-void push_swap(t_stack **stack_a, t_stack **stack_b);
-void free_string_array(char **array);
-void populate_stack(t_stack **stack, char **tokens);
+// Operations
+void    pa(t_stack **a, t_stack **b);
+void    pb(t_stack **a, t_stack **b);
+void    sa(t_stack **a);
+void    sb(t_stack **b);
+void    ss(t_stack **a, t_stack **b);
+void    ra(t_stack **a);
+void    rb(t_stack **b);
+void    rr(t_stack **a, t_stack **b);
+void    rra(t_stack **a);
+void    rrb(t_stack **b);
+void    rrr(t_stack **a, t_stack **b);
 
-// sort_operations
-void pa(t_stack **stack_a, t_stack **stack_b);
-void pb(t_stack **stack_a, t_stack **stack_b);
-void swap(t_stack **stack);
-void sa(t_stack **stack_a);
-void sb(t_stack **stack_b);
-void ss(t_stack **stack_a, t_stack **stack_b);
-void rotate(t_stack **stack);
-void ra(t_stack **stack_a);
-void rb(t_stack **stack_b);
-void rr(t_stack **stack_a, t_stack **stack_b);
-void reverse_rotate(t_stack **stack);
-void rra(t_stack **stack_a);
-void rrb(t_stack **stack_b);
-void rrr(t_stack **stack_a, t_stack **stack_b);
+// Sort
+void    sort_stack(t_stack **a, t_stack **b);
+void    sort_three(t_stack **a);
+void    sort_small(t_stack **a, t_stack **b);
 
-// utils
-void print_stack(t_stack *stack);
-void free_stack(t_stack **stack);
-void free_split(char **s);
-int is_sorted(t_stack *stack);
-int stack_size(t_stack *s_stack);
-int is_valid_number(char *str);
+// Utils
+int     stack_size(t_stack *stack);
+int     is_sorted(t_stack *stack);
+void    free_stack(t_stack **stack);
+t_stack *create_node(int value);
+void    add_node_back(t_stack **stack, t_stack *new);
+int     get_min(t_stack *stack);
+void    index_stack(t_stack **stack);
 
-// sorting func
-void sort_three(t_stack **stack_a);
-int get_min_value(t_stack *stack);
-int get_index_of_value(t_stack *stack, int value);
-void move_to_top(t_stack **stack, int i);
-void sort_five(t_stack **stack_a, t_stack **stack_b);
-void	sort_four(t_stack **stack_a, t_stack **stack_b);
-void sort_small_stack(t_stack **stack_a, t_stack **stack_b, int size);
-// int get_max_value(t_stack *stack);
-void radix_sort(t_stack **stack_a, t_stack **stack_b);
-
-// error
-void	handle_error(t_stack **stack_a, t_stack **stack_b);
-
-int	has_duplicates(t_stack *stack);
-
-void sort_stack(t_stack **stack_a, t_stack **stack_b);
+// Error handling
+void    error_exit(t_stack **a, t_stack **b);
 
 #endif
