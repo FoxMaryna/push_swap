@@ -6,7 +6,7 @@
 /*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:48:07 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/05 11:01:01 by mkrainyk         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:52:07 by mkrainyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,21 @@ static void	parse_numbers(char **nums, t_stack **a)
 	while (nums[j])
 	{
 		if (!is_number(nums[j]))
+		{
+			free_split(nums);
 			error_exit(a, NULL);
+		}
 		num = ft_atol(nums[j]);
 		if (num > INT_MAX || num < INT_MIN || errno == ERANGE)
+		{
+			free_split(nums);
 			error_exit(a, NULL);
+		}
 		if (has_duplicate(*a, num))
+		{
+			free_split(nums);
 			error_exit(a, NULL);
+		}
 		add_node_back(a, create_node(num));
 		free(nums[j]);
 		j++;

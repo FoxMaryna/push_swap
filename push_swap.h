@@ -6,7 +6,7 @@
 /*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:52:26 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/05 10:59:40 by mkrainyk         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:51:01 by mkrainyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	sort_small(t_stack **a, t_stack **b);
 int		stack_size(t_stack *stack);
 int		is_sorted(t_stack *stack);
 void	free_stack(t_stack **stack);
+void	free_split(char **split);
 t_stack	*create_node(int value);
 void	add_node_back(t_stack **stack, t_stack *new);
 void	index_stack(t_stack **stack);

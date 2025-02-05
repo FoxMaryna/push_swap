@@ -6,7 +6,7 @@
 /*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:06:44 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/05 11:00:38 by mkrainyk         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:51:09 by mkrainyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ void	error_exit(t_stack **a, t_stack **b)
 		free_stack(b);
 	ft_printf("Error\n");
 	exit(1);
+}
+
+void	free_split(char **split)
+{
+	int i;
+
+	if (!split)
+		return;
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
 
 static int	check_overflow(long result, int digit, int sign)
