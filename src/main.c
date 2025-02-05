@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maryna <maryna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mkrainyk <mkrainyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 11:48:07 by mkrainyk          #+#    #+#             */
-/*   Updated: 2025/02/04 21:22:04 by maryna           ###   ########.fr       */
+/*   Updated: 2025/02/05 11:01:01 by mkrainyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	has_duplicate(t_stack *a, int num)
 static void	parse_numbers(char **nums, t_stack **a)
 {
 	long	num;
-	int	j;
+	int		j;
 
 	j = 0;
 	while (nums[j])
@@ -51,7 +51,7 @@ static void	parse_numbers(char **nums, t_stack **a)
 			error_exit(a, NULL);
 		num = ft_atol(nums[j]);
 		if (num > INT_MAX || num < INT_MIN || errno == ERANGE)
-  			error_exit(a, NULL);
+			error_exit(a, NULL);
 		if (has_duplicate(*a, num))
 			error_exit(a, NULL);
 		add_node_back(a, create_node(num));
